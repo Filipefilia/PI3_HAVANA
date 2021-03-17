@@ -65,6 +65,7 @@ namespace PI3_Havana
             string[] lista = idPartida.Split(',');
             int id = Convert.ToInt32(lista[0]);
             Jogo.EntrarPartida(id, txtPlayerName.Text, txtPasswordGame.Text);
+            Console.WriteLine("Branch testing");
         }
 
         private void lvlVersion_Click(object sender, EventArgs e)
