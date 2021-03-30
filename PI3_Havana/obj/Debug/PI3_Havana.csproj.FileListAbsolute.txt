@@ -10,3 +10,5 @@ C:\Users\pedro\source\repos\PI3_Havana\PI3_Havana\bin\Debug\CantStopServer.xml
 C:\Users\pedro\source\repos\PI3_Havana\PI3_Havana\obj\Debug\PI3_Havana.csproj.CopyComplete
 C:\Users\pedro\source\repos\PI3_Havana\PI3_Havana\obj\Debug\PI3_Havana.exe
 C:\Users\pedro\source\repos\PI3_Havana\PI3_Havana\obj\Debug\PI3_Havana.pdb
+C:\Users\pedro\source\repos\PI3_Havana\PI3_Havana\obj\Debug\PI3_Havana.Form2.resources
+C:\Users\pedro\source\repos\PI3_Havana\PI3_Havana\obj\Debug\PI3_Havana.Form3.resources
