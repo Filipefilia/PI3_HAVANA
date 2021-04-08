@@ -24,7 +24,7 @@ namespace PI3_Havana
             status = inputStatus;
         }
         
-        public static List<Game> buildGameList()
+        public static List<Game> buildGameList ()
         {
             //Response treatment
             string response = Jogo.ListarPartidas("T");

@@ -56,11 +56,8 @@ namespace PI3_Havana
                 string getGamePassword = txtInputPassword.Text;
                 string response = Jogo.CriarPartida(getGameName, getGamePassword);
 
-                //Check if got an error message
-                string checkIfError = response.Substring(0, 4);
-
                 //Check if the message got a known error
-                if (checkIfError == "ERRO")
+                if (response[0] == 'E')
                 {
                     //Shows returned errors
                     MessageBox.Show(response);
@@ -68,7 +65,7 @@ namespace PI3_Havana
                 else
                 {
                     //Shows a message box when successful
-                    response = "New game created\nID: " + response;
+                    response = $"New game created\nID: {response}";
                     MessageBox.Show(response);
                 }
             }
@@ -98,12 +95,9 @@ namespace PI3_Havana
                 
                 //Enters in a new game and receives user information
                 string response = Jogo.EntrarPartida(selectedGameId, playerName, gamePassword);
-                
-                //Check if got an error message
-                string checkIfError = response.Substring(0, 4);
 
                 //Check if the message got a known error
-                if (checkIfError == "ERRO")
+                if (response[0] == 'E')
                 {
                     //Shows returned errors
                     MessageBox.Show(response);
@@ -149,7 +143,7 @@ namespace PI3_Havana
         {
 
         }
-
+        
         private void button1_Click_2(object sender, EventArgs e)
         {
 
@@ -202,51 +196,27 @@ namespace PI3_Havana
 
         private void btnSelectGame_Click(object sender, EventArgs e)
         {
-            /*try
+            var selectedRow = dgrLobby.SelectedRows[0].DataBoundItem as Game;
+            int selectedGameId = selectedRow.id;
+
+            List<Player> currentPlayers = Player.buildPlayerList(selectedGameId);
+
+            if (currentPlayers != null)
             {
-                //Gets a datagrid row and save its id for enter in a new game
-                var selectedRow = dgrLobby.SelectedRows[0].DataBoundItem as Game;
-                int selectedGameId = selectedRow.id;
-
-                //Gets list of players in selected game
-                string response = Jogo.ListarJogadores(selectedGameId);
-
-                //Check if got an error message
-                string checkIfError = response.Substring(0, 4);
-
-                //Check if the message got a known error
-                if (checkIfError == "ERRO")
-                {
-                    //Shows returned errors
-                    MessageBox.Show(response);
-                }
-                else
-                {
-                    //Construct the list of players and shows it
-                    string[] getListPlayers = response.Replace("\r", "").Split('\n');
-                    string[] listPlayers;
-                    ListBox lbListPlayers = new ListBox();
-                    foreach(string player in getListPlayers)
-                    {
-                        listPlayers = player.Split(',');
-                        lbListPlayers.Items.Add(listPlayers);
-                    }
-                    //lbListPlayers.Show();
-                    MessageBox.Show(Convert.ToString(listPlayers));
-                }
+                DataGrid dgrPlayers = new DataGrid();
+                dataGridView1.DataSource = currentPlayers;
+                dataGridView1.Show();
             }
-            catch (Exception)
+            else
             {
-
-                //Default message for unknown errors
-                MessageBox.Show("Couldn't perform this action, please try again.");
-            }*/
+                MessageBox.Show("No players in this game.");
+            }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
             //Refreshes datagrid Lobby every 5 seconds
-            dgrLobby.DataSource = null;
+            Session currentSession = new Session();
             dgrLobby.DataSource = currentSession.currentList;
         }
 
@@ -266,11 +236,8 @@ namespace PI3_Havana
                 //Send initiante game command
                 string response = Jogo.IniciarPartida(playerId, playerPassword);
                 
-                //Check if got an error message
-                string checkIfError = response.Substring(0, 4);
-                
                 //Check if the message got a known error
-                if (checkIfError == "ERRO")
+                if (response[0] == 'E')
                 {
                     //Shows returned errors
                     MessageBox.Show(response);
@@ -361,6 +328,28 @@ namespace PI3_Havana
         private void form1BindingSource_CurrentChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnRollDice_Click(object sender, EventArgs e)
+        {
+            string response = Jogo.RolarDados(90, "F10892");
+            response = response.Replace("\r", "");
+            string[] dice = response.Split('\n');
+
+            lblDie1.Text = dice[0];
+            lblDie2.Text = dice[1];
+            lblDie3.Text = dice[2];
+            lblDie4.Text = dice[3];
         }
     }
 }
