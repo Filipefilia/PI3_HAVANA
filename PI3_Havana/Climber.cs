@@ -10,7 +10,7 @@ namespace PI3_Havana
 {
     class Climber
     {
-        Label genClimber = new Label();
+        public Label genClimber = new Label();
 
         public Climber ()
         {
@@ -24,9 +24,9 @@ namespace PI3_Havana
             //Form3.ActiveForm.Controls.Add(this.genClimber);
         }
 
-        public void generateNewClimbers ()
+        public void generateNewClimbers (int posX, int posY)
         {
-            this.genClimber.Location = new Point(594, 130);
+            this.genClimber.Location = new Point(posX, posY);
             Form3.ActiveForm.Controls.Add(this.genClimber);
             this.genClimber.Show();
         }

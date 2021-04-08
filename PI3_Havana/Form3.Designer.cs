@@ -66,11 +66,12 @@ namespace PI3_Havana
             this.lblPawn1.BackColor = System.Drawing.Color.Transparent;
             this.lblPawn1.Font = new System.Drawing.Font("Wingdings", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
             this.lblPawn1.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.lblPawn1.Location = new System.Drawing.Point(594, 130);
+            this.lblPawn1.Location = new System.Drawing.Point(582, 130);
             this.lblPawn1.Name = "lblPawn1";
             this.lblPawn1.Size = new System.Drawing.Size(43, 38);
             this.lblPawn1.TabIndex = 20;
             this.lblPawn1.Text = "l";
+            this.lblPawn1.Click += new System.EventHandler(this.lblPawn1_Click);
             // 
             // lblPawn3
             // 
@@ -90,7 +91,7 @@ namespace PI3_Havana
             this.btnGenPawns.Name = "btnGenPawns";
             this.btnGenPawns.Size = new System.Drawing.Size(75, 23);
             this.btnGenPawns.TabIndex = 22;
-            this.btnGenPawns.Text = "GENERATE";
+            this.btnGenPawns.Text = "button1";
             this.btnGenPawns.UseVisualStyleBackColor = true;
             this.btnGenPawns.Click += new System.EventHandler(this.btnGenPawns_Click);
             // 
@@ -100,7 +101,7 @@ namespace PI3_Havana
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.ClientSize = new System.Drawing.Size(760, 546);
+            this.ClientSize = new System.Drawing.Size(830, 546);
             this.Controls.Add(this.btnGenPawns);
             this.Controls.Add(this.lblPawn3);
             this.Controls.Add(this.lblPawn1);
@@ -109,6 +110,8 @@ namespace PI3_Havana
             this.ForeColor = System.Drawing.Color.White;
             this.Name = "Form3";
             this.Text = "Form3";
+            this.Load += new System.EventHandler(this.Form3_Load);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form3_Paint);
             this.ResumeLayout(false);
             this.PerformLayout();
 

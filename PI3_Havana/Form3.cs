@@ -50,34 +50,65 @@ namespace PI3_Havana
             
         }
 
+        private void btnGenPawns_Click(object sender, EventHandler e, PaintEventArgs x)
+        {
+
+        }
+
+        private void Form3_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form3_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
         private void btnGenPawns_Click(object sender, EventArgs e)
         {
-            /*Label[] newPawns = new Label[10];
+            Board boardTrails = new Board();
+            List<Trails> myTrails = boardTrails.createBoard;
 
-            Label tempLabel1 = new Label();
-            Label tempLabel2 = new Label();
-            Label tempLabel3 = new Label();
+            string getBoard = Jogo.ExibirTabuleiro(129);
 
-            tempLabel1.Location = lblPawn1.Location;
-            tempLabel1.Visible = true;
-            tempLabel1.Text = "IM HERE";
-            tempLabel1.Size = new System.Drawing.Size(77, 21);
-            Form3.ActiveForm.Controls.Add(tempLabel1);
-            tempLabel1.BackColor = Color.Black;
-            tempLabel2.Location = lblPawn2.Location;
-            tempLabel3.Location = lblPawn1.Location;
+            string[] actualClimbers = getBoard.Replace("\r", "").Split('\n');
+            int numberOfClimbers = actualClimbers.Length - 1;
+            Climber[] myClimbers = new Climber[numberOfClimbers];
+            Color myColor;
+            int count = 0;
+            string[] actualPawn;
+            int adjustLocation = 0;
 
-            tempLabel1.ForeColor = Color.Magenta;
+            for (int i = 0; i < numberOfClimbers; i++)
+            {
+                actualPawn = actualClimbers[i].Split(',');
+                if (Convert.ToInt32(actualPawn[2]) == 168)
+                {
+                    myColor = System.Drawing.Color.DarkMagenta;
+                }
+                else if (Convert.ToInt32(actualPawn[2]) == 169)
+                {
+                    myColor = System.Drawing.Color.AliceBlue;
+                }
+                else
+                {
+                    myColor = System.Drawing.Color.GreenYellow;
+                }
 
-            newPawns.Append(tempLabel1);
-            newPawns.Append(tempLabel2);
-            newPawns.Append(tempLabel3);
+                Trails thisTrail = myTrails.Find(x => x.referencePosition == $"{actualPawn[0]},{actualPawn[1]}");
+                Climber test = new Climber();
+                test.generateNewClimbers(thisTrail.positionX + adjustLocation, thisTrail.positionY);
+                test.genClimber.ForeColor = myColor;
+                count++;
+                adjustLocation += 5;
+            }
 
-            tempLabel1.Show();
-            tempLabel2.Show();
-            tempLabel3.Show();*/
-            Climber myNewClimber = new Climber();
-            myNewClimber.generateNewClimbers();
+        }
+
+        private void lblPawn1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
