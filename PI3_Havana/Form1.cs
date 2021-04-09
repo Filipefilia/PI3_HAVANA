@@ -354,16 +354,30 @@ namespace PI3_Havana
         {
             this.Hide();
             int gameId;
+            /*
+            txtPlayerId.Text = "168";
+            txtPlayerPassword.Text = "6095CC";
+            txtPlayerName.Text = "";
+            txtGameId.Text = "";
+            */
+
+            string[] currentPlayer = { txtPlayerId.Text, txtPlayerName.Text, txtPlayerPassword.Text, txtGameId.Text };
+
             try
             {
-                gameId = Convert.ToInt32(txtGameId.Text);
+                //currentPlayer.Append(txtPlayerId.Text);
+                //currentPlayer.Append(txtPlayerName.Text);
+                //currentPlayer.Append(txtPasswordGame.Text);
+                //currentPlayer.Append(txtGameId.Text);
+                gameId = Convert.ToInt32(currentPlayer[3]);
             }
             catch
             {
                 var selectedRow = dgrLobby.SelectedRows[0].DataBoundItem as Game;
                 gameId = selectedRow.id;
             }
-            Form3 board = new Form3(Convert.ToInt32(gameId));
+
+            Form3 board = new Form3(currentPlayer, gameId);
             board.ShowDialog();
         }
     }
