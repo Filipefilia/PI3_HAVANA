@@ -10,14 +10,14 @@ namespace PI3_Havana
     class Player
     {
         public int playerId { get; private set; }
-        public string playerCollor { get; private set; }
-        public string playerPassword { get; private set; }
+        public string playerName { get; private set; }
+        public string playerColor { get; private set; }
 
-        private Player (int inputPlayerId, string inputPlayerCollor, string inputPlayerPassword)
+        private Player (int inputPlayerId, string inputPlayerName, string inputPlayerColor)
         {
             playerId = inputPlayerId;
-            playerCollor = inputPlayerCollor;
-            playerPassword = inputPlayerPassword;
+            playerName = inputPlayerName;
+            playerColor = inputPlayerColor;
         }
 
         public static List<Player> buildPlayerList (int inputGameId)

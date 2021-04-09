@@ -342,14 +342,29 @@ namespace PI3_Havana
 
         private void btnRollDice_Click(object sender, EventArgs e)
         {
-            string response = Jogo.RolarDados(90, "F10892");
-            response = response.Replace("\r", "");
-            string[] dice = response.Split('\n');
 
-            lblDie1.Text = dice[0];
-            lblDie2.Text = dice[1];
-            lblDie3.Text = dice[2];
-            lblDie4.Text = dice[3];
+        }
+
+        private void lblDie2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnGetBoard_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            int gameId;
+            try
+            {
+                gameId = Convert.ToInt32(txtGameId.Text);
+            }
+            catch
+            {
+                var selectedRow = dgrLobby.SelectedRows[0].DataBoundItem as Game;
+                gameId = selectedRow.id;
+            }
+            Form3 board = new Form3(Convert.ToInt32(gameId));
+            board.ShowDialog();
         }
     }
 }

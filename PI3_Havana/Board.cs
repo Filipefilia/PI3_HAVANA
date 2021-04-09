@@ -104,7 +104,7 @@ namespace PI3_Havana
 
             //Trail Number 11
             trailPositions.Add(new Trails("11,1", 419, 342));
-            trailPositions.Add(new Trails("11,2", 418, 308));
+            trailPositions.Add(new Trails("11,2", 415, 308));
             trailPositions.Add(new Trails("11,3", 418, 270));
             trailPositions.Add(new Trails("11,4", 418, 232));
 
