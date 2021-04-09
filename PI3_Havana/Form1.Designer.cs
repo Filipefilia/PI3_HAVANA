@@ -54,17 +54,15 @@ namespace PI3_Havana
             this.lblGameId = new System.Windows.Forms.Label();
             this.tmrLobby = new System.Windows.Forms.Timer(this.components);
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.lblDie1 = new System.Windows.Forms.Label();
-            this.lblDie2 = new System.Windows.Forms.Label();
-            this.lblDie3 = new System.Windows.Forms.Label();
-            this.lblDie4 = new System.Windows.Forms.Label();
             this.sessionBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.form1BindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.btnRollDice = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnGetBoard = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgrLobby)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sessionBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.form1BindingSource)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtGameName
@@ -224,6 +222,7 @@ namespace PI3_Havana
             // 
             this.txtPlayerId.Location = new System.Drawing.Point(33, 411);
             this.txtPlayerId.Name = "txtPlayerId";
+            this.txtPlayerId.ReadOnly = true;
             this.txtPlayerId.Size = new System.Drawing.Size(100, 20);
             this.txtPlayerId.TabIndex = 20;
             this.txtPlayerId.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
@@ -242,6 +241,7 @@ namespace PI3_Havana
             // 
             this.txtPlayerCollor.Location = new System.Drawing.Point(33, 493);
             this.txtPlayerCollor.Name = "txtPlayerCollor";
+            this.txtPlayerCollor.ReadOnly = true;
             this.txtPlayerCollor.Size = new System.Drawing.Size(100, 20);
             this.txtPlayerCollor.TabIndex = 23;
             this.txtPlayerCollor.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
@@ -250,6 +250,7 @@ namespace PI3_Havana
             // 
             this.txtGameId.Location = new System.Drawing.Point(175, 493);
             this.txtGameId.Name = "txtGameId";
+            this.txtGameId.ReadOnly = true;
             this.txtGameId.Size = new System.Drawing.Size(100, 20);
             this.txtGameId.TabIndex = 24;
             this.txtGameId.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
@@ -283,53 +284,12 @@ namespace PI3_Havana
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(578, 13);
+            this.dataGridView1.Location = new System.Drawing.Point(20, 19);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(240, 247);
             this.dataGridView1.TabIndex = 27;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridView1.Click += new System.EventHandler(this.dataGridView1_Click);
-            // 
-            // lblDie1
-            // 
-            this.lblDie1.AutoEllipsis = true;
-            this.lblDie1.AutoSize = true;
-            this.lblDie1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDie1.Location = new System.Drawing.Point(575, 308);
-            this.lblDie1.Name = "lblDie1";
-            this.lblDie1.Size = new System.Drawing.Size(55, 24);
-            this.lblDie1.TabIndex = 28;
-            this.lblDie1.Text = "DIE 1";
-            // 
-            // lblDie2
-            // 
-            this.lblDie2.AutoSize = true;
-            this.lblDie2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDie2.Location = new System.Drawing.Point(574, 332);
-            this.lblDie2.Name = "lblDie2";
-            this.lblDie2.Size = new System.Drawing.Size(55, 24);
-            this.lblDie2.TabIndex = 29;
-            this.lblDie2.Text = "DIE 2";
-            // 
-            // lblDie3
-            // 
-            this.lblDie3.AutoSize = true;
-            this.lblDie3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDie3.Location = new System.Drawing.Point(575, 356);
-            this.lblDie3.Name = "lblDie3";
-            this.lblDie3.Size = new System.Drawing.Size(55, 24);
-            this.lblDie3.TabIndex = 30;
-            this.lblDie3.Text = "DIE 3";
-            // 
-            // lblDie4
-            // 
-            this.lblDie4.AutoSize = true;
-            this.lblDie4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDie4.Location = new System.Drawing.Point(575, 380);
-            this.lblDie4.Name = "lblDie4";
-            this.lblDie4.Size = new System.Drawing.Size(55, 24);
-            this.lblDie4.TabIndex = 31;
-            this.lblDie4.Text = "DIE 4";
             // 
             // sessionBindingSource
             // 
@@ -341,15 +301,26 @@ namespace PI3_Havana
             this.form1BindingSource.DataSource = typeof(PI3_Havana.Form1);
             this.form1BindingSource.CurrentChanged += new System.EventHandler(this.form1BindingSource_CurrentChanged);
             // 
-            // btnRollDice
+            // groupBox1
             // 
-            this.btnRollDice.Location = new System.Drawing.Point(579, 411);
-            this.btnRollDice.Name = "btnRollDice";
-            this.btnRollDice.Size = new System.Drawing.Size(50, 47);
-            this.btnRollDice.TabIndex = 32;
-            this.btnRollDice.Text = "Roll";
-            this.btnRollDice.UseVisualStyleBackColor = true;
-            this.btnRollDice.Click += new System.EventHandler(this.btnRollDice_Click);
+            this.groupBox1.Controls.Add(this.btnGetBoard);
+            this.groupBox1.Controls.Add(this.dataGridView1);
+            this.groupBox1.Location = new System.Drawing.Point(558, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(279, 325);
+            this.groupBox1.TabIndex = 28;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Selected Game";
+            // 
+            // btnGetBoard
+            // 
+            this.btnGetBoard.Location = new System.Drawing.Point(20, 284);
+            this.btnGetBoard.Name = "btnGetBoard";
+            this.btnGetBoard.Size = new System.Drawing.Size(240, 23);
+            this.btnGetBoard.TabIndex = 28;
+            this.btnGetBoard.Text = "Check Board";
+            this.btnGetBoard.UseVisualStyleBackColor = true;
+            this.btnGetBoard.Click += new System.EventHandler(this.btnGetBoard_Click);
             // 
             // Form1
             // 
@@ -357,12 +328,7 @@ namespace PI3_Havana
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(871, 561);
-            this.Controls.Add(this.btnRollDice);
-            this.Controls.Add(this.lblDie4);
-            this.Controls.Add(this.lblDie3);
-            this.Controls.Add(this.lblDie2);
-            this.Controls.Add(this.lblDie1);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.lblGameId);
             this.Controls.Add(this.lblCollor);
             this.Controls.Add(this.txtGameId);
@@ -392,6 +358,7 @@ namespace PI3_Havana
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sessionBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.form1BindingSource)).EndInit();
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -424,11 +391,8 @@ namespace PI3_Havana
         private System.Windows.Forms.Label lblGameId;
         private System.Windows.Forms.Timer tmrLobby;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Label lblDie1;
-        private System.Windows.Forms.Label lblDie2;
-        private System.Windows.Forms.Label lblDie3;
-        private System.Windows.Forms.Label lblDie4;
-        private System.Windows.Forms.Button btnRollDice;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button btnGetBoard;
     }
 }
 

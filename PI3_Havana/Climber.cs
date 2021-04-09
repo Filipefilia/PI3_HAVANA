@@ -24,11 +24,12 @@ namespace PI3_Havana
             //Form3.ActiveForm.Controls.Add(this.genClimber);
         }
 
-        public void generateNewClimbers (int posX, int posY)
+        public Point setClimberLocation (int posX, int posY)
         {
             this.genClimber.Location = new Point(posX, posY);
-            Form3.ActiveForm.Controls.Add(this.genClimber);
-            this.genClimber.Show();
+            //board.ActiveForm.Controls.Add(this.genClimber);
+            //this.genClimber.Show();
+            return this.genClimber.Location;
         }
     }
 }

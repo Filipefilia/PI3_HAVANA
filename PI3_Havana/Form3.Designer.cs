@@ -34,18 +34,22 @@ namespace PI3_Havana
             this.lblPawn2 = new System.Windows.Forms.Label();
             this.lblPawn1 = new System.Windows.Forms.Label();
             this.lblPawn3 = new System.Windows.Forms.Label();
-            this.btnGenPawns = new System.Windows.Forms.Button();
+            this.btnViewBoard = new System.Windows.Forms.Button();
+            this.btnRollDice = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnTestBoard
             // 
+            this.btnTestBoard.BackColor = System.Drawing.Color.White;
+            this.btnTestBoard.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnTestBoard.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnTestBoard.ForeColor = System.Drawing.Color.Black;
             this.btnTestBoard.Location = new System.Drawing.Point(12, 12);
             this.btnTestBoard.Name = "btnTestBoard";
             this.btnTestBoard.Size = new System.Drawing.Size(75, 23);
             this.btnTestBoard.TabIndex = 6;
             this.btnTestBoard.Text = "TRY";
-            this.btnTestBoard.UseVisualStyleBackColor = true;
+            this.btnTestBoard.UseVisualStyleBackColor = false;
             this.btnTestBoard.Click += new System.EventHandler(this.button1_Click);
             // 
             // lblPawn2
@@ -85,15 +89,30 @@ namespace PI3_Havana
             this.lblPawn3.TabIndex = 21;
             this.lblPawn3.Text = "l";
             // 
-            // btnGenPawns
+            // btnViewBoard
             // 
-            this.btnGenPawns.Location = new System.Drawing.Point(12, 53);
-            this.btnGenPawns.Name = "btnGenPawns";
-            this.btnGenPawns.Size = new System.Drawing.Size(75, 23);
-            this.btnGenPawns.TabIndex = 22;
-            this.btnGenPawns.Text = "button1";
-            this.btnGenPawns.UseVisualStyleBackColor = true;
-            this.btnGenPawns.Click += new System.EventHandler(this.btnGenPawns_Click);
+            this.btnViewBoard.BackColor = System.Drawing.Color.White;
+            this.btnViewBoard.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnViewBoard.ForeColor = System.Drawing.Color.Black;
+            this.btnViewBoard.Location = new System.Drawing.Point(12, 53);
+            this.btnViewBoard.Name = "btnViewBoard";
+            this.btnViewBoard.Size = new System.Drawing.Size(75, 37);
+            this.btnViewBoard.TabIndex = 22;
+            this.btnViewBoard.Text = "VIEW BOARD";
+            this.btnViewBoard.UseVisualStyleBackColor = false;
+            this.btnViewBoard.Click += new System.EventHandler(this.btnGenPawns_Click);
+            // 
+            // btnRollDice
+            // 
+            this.btnRollDice.BackColor = System.Drawing.Color.White;
+            this.btnRollDice.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnRollDice.ForeColor = System.Drawing.Color.Black;
+            this.btnRollDice.Location = new System.Drawing.Point(13, 107);
+            this.btnRollDice.Name = "btnRollDice";
+            this.btnRollDice.Size = new System.Drawing.Size(75, 23);
+            this.btnRollDice.TabIndex = 23;
+            this.btnRollDice.Text = "ROLL DICE";
+            this.btnRollDice.UseVisualStyleBackColor = false;
             // 
             // Form3
             // 
@@ -102,7 +121,8 @@ namespace PI3_Havana
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(830, 546);
-            this.Controls.Add(this.btnGenPawns);
+            this.Controls.Add(this.btnRollDice);
+            this.Controls.Add(this.btnViewBoard);
             this.Controls.Add(this.lblPawn3);
             this.Controls.Add(this.lblPawn1);
             this.Controls.Add(this.lblPawn2);
@@ -122,6 +142,7 @@ namespace PI3_Havana
         public System.Windows.Forms.Label lblPawn2;
         public System.Windows.Forms.Label lblPawn1;
         public System.Windows.Forms.Label lblPawn3;
-        private System.Windows.Forms.Button btnGenPawns;
+        private System.Windows.Forms.Button btnViewBoard;
+        private System.Windows.Forms.Button btnRollDice;
     }
 }
