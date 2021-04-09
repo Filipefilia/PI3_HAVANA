@@ -13,10 +13,12 @@ namespace PI3_Havana
 {
     public partial class Form3 : Form
     {
+        public string[] currentPlayer { get; private set; }
         public int gameId { get; private set; }
-        public Form3(int inputGameId)
+        public Form3(string[] inputCurrentPlayer, int inputGameId)
         {
             gameId = inputGameId;
+            currentPlayer = inputCurrentPlayer;
             InitializeComponent();
         }
 
@@ -134,6 +136,38 @@ namespace PI3_Havana
         private void lblPawn1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void Form3_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void btnRollDice_Click(object sender, EventArgs e)
+        {
+            if (currentPlayer[0] != null)
+            {
+                int playerId = Convert.ToInt32(currentPlayer[0]);
+                string playerPassword = currentPlayer[2];
+                string rollDice = Jogo.RolarDados(playerId, playerPassword);
+
+                if (rollDice[0] != 'E')
+                {
+                    string[] diceResult = rollDice.Replace("\r", "").Split('\n');
+
+                    lblDie1.Text = $"1: {diceResult[0][1]}";
+                    lblDie2.Text = $"2: {diceResult[1][1]}";
+                    lblDie3.Text = $"3: {diceResult[2][1]}";
+                    lblDie4.Text = $"4: {diceResult[3][1]}";
+                } else
+                {
+                    MessageBox.Show($"{rollDice}");
+                }
+            }
+            else
+            {
+                MessageBox.Show("There's no player available to roll dice!");
+            }
         }
     }
 }
