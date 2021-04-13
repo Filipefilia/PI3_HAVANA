@@ -12,6 +12,7 @@ namespace PI3_Havana
         public int playerId { get; private set; }
         public string playerName { get; private set; }
         public string playerColor { get; private set; }
+        public List<string[]> sessionData { get; set; }
 
         private Player (int inputPlayerId, string inputPlayerName, string inputPlayerColor)
         {

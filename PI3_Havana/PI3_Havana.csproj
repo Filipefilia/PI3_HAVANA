@@ -51,6 +51,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Board.cs" />
+    <Compile Include="BoardInterface.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BoardInterface.Designer.cs">
+      <DependentUpon>BoardInterface.cs</DependentUpon>
+    </Compile>
     <Compile Include="Climber.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -80,6 +86,18 @@
       <DependentUpon>Form1.cs</DependentUpon>
       <CustomToolNamespace>PI3_Havana</CustomToolNamespace>
     </Content>
+    <None Include="Resources\map1.png" />
+    <None Include="Resources\green_br.png" />
+    <None Include="Resources\red_bl.png" />
+    <None Include="Resources\yellow_br.png" />
+    <None Include="Resources\blue_bl.png" />
+    <None Include="Resources\green_tr.png" />
+    <None Include="Resources\null.png" />
+    <None Include="Resources\red_tl.png" />
+    <None Include="Resources\map.png" />
+    <EmbeddedResource Include="BoardInterface.resx">
+      <DependentUpon>BoardInterface.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form2.resx">
       <DependentUpon>Form2.cs</DependentUpon>
     </EmbeddedResource>
@@ -94,6 +112,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\DataSources\Form1.datasource" />
     <None Include="Properties\DataSources\Game.datasource" />

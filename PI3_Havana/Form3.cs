@@ -24,27 +24,8 @@ namespace PI3_Havana
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Board newBoard = new Board();
-            //newBoard
-            string[] tabuleiro = { "12,1", "8,6", "7,10" };
-            Label[] currentPawns = { lblPawn1, lblPawn2, lblPawn3};
-            var i = 0;
-
-            foreach (string map in tabuleiro)
-            {
-                string[] current = map.Split(',');
-                Trails lambda = newBoard.createBoard.Find(x => x.referencePosition == $"{current[0]},{current[1]}");
-                Point newLocation = new Point(
-                    lambda.positionX,
-                    lambda.positionY
-                );
-
-                currentPawns[i].Location = newLocation;
-                currentPawns[i].ForeColor = Color.Red;
-                i++;
-            }
-            
-
+            string isItTurn = Jogo.VerificarVez(gameId);
+            MessageBox.Show(isItTurn);
         }
 
         private void label4_Click(object sender, EventArgs e)
@@ -70,31 +51,34 @@ namespace PI3_Havana
         private void btnGenPawns_Click(object sender, EventArgs e)
         {
             // Get players colors
-            Color setPlayerColor(List<Player> inputCurrentPlayers, int inputPlayerId)
+            Color setPlayerColor(List<Player> inputCurrentPlayers, string[] inputPawn)
             {
-                Player currentPlayer = inputCurrentPlayers.Find(x => x.playerId == inputPlayerId);
+                Player currentPlayer = inputCurrentPlayers.Find(x => x.playerId == Convert.ToInt16(inputPawn[2]));
                 string inputColor = currentPlayer.playerColor;
                 Color playerColor;
 
-                if (inputColor == "Vermelho")
+                if (inputPawn[3] == "B")
                 {
-                    playerColor = System.Drawing.Color.Red;
-                }
-                else if (inputColor == "Verde")
-                {
-                    playerColor = System.Drawing.Color.Green;
-                }
-                else if (inputColor == "Azul")
-                {
-                    playerColor = System.Drawing.Color.Blue;
-                }
-                else if (inputColor == "Amarelo")
-                {
-                    playerColor = System.Drawing.Color.Yellow;
+                    if (inputColor == "Vermelho")
+                    {
+                        playerColor = System.Drawing.Color.Red;
+                    }
+                    else if (inputColor == "Verde")
+                    {
+                        playerColor = System.Drawing.Color.Green;
+                    }
+                    else if (inputColor == "Azul")
+                    {
+                        playerColor = System.Drawing.Color.Blue;
+                    }
+                    else
+                    {
+                        playerColor = System.Drawing.Color.Yellow;
+                    }
                 }
                 else
                 {
-                    playerColor = System.Drawing.Color.White;
+                    playerColor = System.Drawing.Color.Black;
                 }
 
                 return playerColor;
@@ -119,7 +103,7 @@ namespace PI3_Havana
 
                 Color pawnColor;
                 actualPawn = actualClimbers[i].Split(',');
-                pawnColor = setPlayerColor(currentPlayers, Convert.ToInt32(actualPawn[2]));
+                pawnColor = setPlayerColor(currentPlayers, actualPawn);
 
                 Trails thisTrail = myTrails.Find(x => x.referencePosition == $"{actualPawn[0]},{actualPawn[1]}");
                 Climber test = new Climber();
@@ -168,6 +152,31 @@ namespace PI3_Havana
             {
                 MessageBox.Show("There's no player available to roll dice!");
             }
+        }
+
+        private void tmrCheckTurn_Tick(object sender, EventArgs e)
+        {
+            string checkTurn = Jogo.VerificarVez(gameId);
+            string[] splitCheckTurn = checkTurn.Split(',');
+
+            if (splitCheckTurn[1] == currentPlayer[0])
+            {
+                lblCheckTurn.Text = "It is your turn!";
+            } 
+            else
+            {
+                lblCheckTurn.Text = $"Player {splitCheckTurn[1]} turn.";
+            }
+        }
+
+        private void lblCheckTurn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblPawn3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

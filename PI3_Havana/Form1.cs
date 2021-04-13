@@ -377,7 +377,8 @@ namespace PI3_Havana
                 gameId = selectedRow.id;
             }
 
-            Form3 board = new Form3(currentPlayer, gameId);
+            //Form3 board = new Form3(currentPlayer, gameId);
+            BoardInterface board = new BoardInterface();
             board.ShowDialog();
         }
     }
