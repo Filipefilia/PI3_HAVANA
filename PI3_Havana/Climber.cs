@@ -15,7 +15,7 @@ namespace PI3_Havana
         public Climber ()
         {
             this.genClimber.Text = "l";
-            this.genClimber.Font = new Font("Wingdings", 26);
+            this.genClimber.Font = new Font("Wingdings", 10);
             this.genClimber.Visible = true;
             this.genClimber.ForeColor = Color.White;
             this.genClimber.BackColor = Color.Transparent;

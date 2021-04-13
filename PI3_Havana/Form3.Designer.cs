@@ -29,6 +29,7 @@ namespace PI3_Havana
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form3));
             this.btnTestBoard = new System.Windows.Forms.Button();
             this.lblPawn2 = new System.Windows.Forms.Label();
@@ -41,6 +42,8 @@ namespace PI3_Havana
             this.lblDie2 = new System.Windows.Forms.Label();
             this.lblDie3 = new System.Windows.Forms.Label();
             this.lblDie4 = new System.Windows.Forms.Label();
+            this.tmrCheckTurn = new System.Windows.Forms.Timer(this.components);
+            this.lblCheckTurn = new System.Windows.Forms.Label();
             this.grBoxClimbers.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,9 +55,9 @@ namespace PI3_Havana
             this.btnTestBoard.ForeColor = System.Drawing.Color.Black;
             this.btnTestBoard.Location = new System.Drawing.Point(12, 12);
             this.btnTestBoard.Name = "btnTestBoard";
-            this.btnTestBoard.Size = new System.Drawing.Size(75, 23);
+            this.btnTestBoard.Size = new System.Drawing.Size(75, 35);
             this.btnTestBoard.TabIndex = 6;
-            this.btnTestBoard.Text = "TRY";
+            this.btnTestBoard.Text = "CHECK TURN";
             this.btnTestBoard.UseVisualStyleBackColor = false;
             this.btnTestBoard.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -94,6 +97,7 @@ namespace PI3_Havana
             this.lblPawn3.Size = new System.Drawing.Size(43, 38);
             this.lblPawn3.TabIndex = 21;
             this.lblPawn3.Text = "l";
+            this.lblPawn3.Click += new System.EventHandler(this.lblPawn3_Click);
             // 
             // btnViewBoard
             // 
@@ -113,7 +117,7 @@ namespace PI3_Havana
             this.btnRollDice.BackColor = System.Drawing.Color.White;
             this.btnRollDice.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnRollDice.ForeColor = System.Drawing.Color.Black;
-            this.btnRollDice.Location = new System.Drawing.Point(13, 107);
+            this.btnRollDice.Location = new System.Drawing.Point(12, 96);
             this.btnRollDice.Name = "btnRollDice";
             this.btnRollDice.Size = new System.Drawing.Size(75, 23);
             this.btnRollDice.TabIndex = 23;
@@ -178,6 +182,25 @@ namespace PI3_Havana
             this.lblDie4.TabIndex = 28;
             this.lblDie4.Text = "______";
             // 
+            // tmrCheckTurn
+            // 
+            this.tmrCheckTurn.Enabled = true;
+            this.tmrCheckTurn.Interval = 5000;
+            this.tmrCheckTurn.Tick += new System.EventHandler(this.tmrCheckTurn_Tick);
+            // 
+            // lblCheckTurn
+            // 
+            this.lblCheckTurn.AutoSize = true;
+            this.lblCheckTurn.BackColor = System.Drawing.Color.Transparent;
+            this.lblCheckTurn.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCheckTurn.Location = new System.Drawing.Point(605, 467);
+            this.lblCheckTurn.Name = "lblCheckTurn";
+            this.lblCheckTurn.Size = new System.Drawing.Size(162, 29);
+            this.lblCheckTurn.TabIndex = 29;
+            this.lblCheckTurn.Text = "Waiting start...";
+            this.lblCheckTurn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblCheckTurn.Click += new System.EventHandler(this.lblCheckTurn_Click);
+            // 
             // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -185,6 +208,7 @@ namespace PI3_Havana
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(830, 546);
+            this.Controls.Add(this.lblCheckTurn);
             this.Controls.Add(this.lblDie4);
             this.Controls.Add(this.lblDie3);
             this.Controls.Add(this.lblDie2);
@@ -218,5 +242,7 @@ namespace PI3_Havana
         private System.Windows.Forms.Label lblDie2;
         private System.Windows.Forms.Label lblDie3;
         private System.Windows.Forms.Label lblDie4;
+        private System.Windows.Forms.Timer tmrCheckTurn;
+        private System.Windows.Forms.Label lblCheckTurn;
     }
 }

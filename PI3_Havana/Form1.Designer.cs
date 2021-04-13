@@ -278,7 +278,7 @@ namespace PI3_Havana
             // tmrLobby
             // 
             this.tmrLobby.Enabled = true;
-            this.tmrLobby.Interval = 20000;
+            this.tmrLobby.Interval = 10000;
             this.tmrLobby.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // dataGridView1
