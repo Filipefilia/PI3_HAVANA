@@ -62,7 +62,7 @@ namespace PI3_Havana
             currentPlayer = inputCurrentPlayer;
         
             InitializeComponent();
-            //SpawnPawn();
+            SpawnPawn();
         }
 
         private void BoardInterface_FormClosing(object sender, FormClosingEventArgs e)
