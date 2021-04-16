@@ -14,13 +14,32 @@ namespace PI3_Havana
     public partial class Form1 : Form
     {
         Session currentSession = new Session();
-
+        //para eventuais problemas de compatibilidades entre linux e windows.      
+        public bool IsLinux()
+        {
+            OperatingSystem os = Environment.OSVersion;
+            PlatformID pid = os.Platform;
+            if (pid == PlatformID.Unix)
+            {
+                return true;
+            }
+            return false;
+        }
         public Form1()
         {
             InitializeComponent();
 
             //Label .dll version
-            lblVersion.Text = Jogo.Versao.ToString();
+            lblVersion.Text = "DLL V" + Jogo.Versao.ToString();
+            if (IsLinux())
+            {
+                OS.Text = "OS: GNU/Linux";
+            }
+            else
+            {
+                OS.Text = "OS: Windows";
+            }
+            
             
             //Lobby DataGrid
             dgrLobby.DataSource = currentSession.currentList;
@@ -378,7 +397,7 @@ namespace PI3_Havana
             }
 
             //Form3 board = new Form3(currentPlayer, gameId);
-            BoardInterface board = new BoardInterface();
+            BoardInterface board = new BoardInterface(currentPlayer, gameId);
             board.ShowDialog();
         }
     }

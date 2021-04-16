@@ -54,15 +54,16 @@ namespace PI3_Havana
             this.lblGameId = new System.Windows.Forms.Label();
             this.tmrLobby = new System.Windows.Forms.Timer(this.components);
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.sessionBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.form1BindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnGetBoard = new System.Windows.Forms.Button();
+            this.OS = new System.Windows.Forms.Label();
+            this.sessionBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.form1BindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgrLobby)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sessionBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.form1BindingSource)).BeginInit();
-            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtGameName
@@ -162,7 +163,7 @@ namespace PI3_Havana
             // lblVersion
             // 
             this.lblVersion.AutoSize = true;
-            this.lblVersion.Location = new System.Drawing.Point(824, 539);
+            this.lblVersion.Location = new System.Drawing.Point(783, 539);
             this.lblVersion.Name = "lblVersion";
             this.lblVersion.Size = new System.Drawing.Size(35, 13);
             this.lblVersion.TabIndex = 14;
@@ -291,16 +292,6 @@ namespace PI3_Havana
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridView1.Click += new System.EventHandler(this.dataGridView1_Click);
             // 
-            // sessionBindingSource
-            // 
-            this.sessionBindingSource.DataSource = typeof(PI3_Havana.Session);
-            this.sessionBindingSource.CurrentChanged += new System.EventHandler(this.sessionBindingSource_CurrentChanged);
-            // 
-            // form1BindingSource
-            // 
-            this.form1BindingSource.DataSource = typeof(PI3_Havana.Form1);
-            this.form1BindingSource.CurrentChanged += new System.EventHandler(this.form1BindingSource_CurrentChanged);
-            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.btnGetBoard);
@@ -322,12 +313,32 @@ namespace PI3_Havana
             this.btnGetBoard.UseVisualStyleBackColor = true;
             this.btnGetBoard.Click += new System.EventHandler(this.btnGetBoard_Click);
             // 
+            // OS
+            // 
+            this.OS.AutoSize = true;
+            this.OS.Location = new System.Drawing.Point(783, 514);
+            this.OS.Name = "OS";
+            this.OS.Size = new System.Drawing.Size(35, 13);
+            this.OS.TabIndex = 29;
+            this.OS.Text = "label1";
+            // 
+            // sessionBindingSource
+            // 
+            this.sessionBindingSource.DataSource = typeof(PI3_Havana.Session);
+            this.sessionBindingSource.CurrentChanged += new System.EventHandler(this.sessionBindingSource_CurrentChanged);
+            // 
+            // form1BindingSource
+            // 
+            this.form1BindingSource.DataSource = typeof(PI3_Havana.Form1);
+            this.form1BindingSource.CurrentChanged += new System.EventHandler(this.form1BindingSource_CurrentChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(871, 561);
+            this.Controls.Add(this.OS);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.lblGameId);
             this.Controls.Add(this.lblCollor);
@@ -356,9 +367,9 @@ namespace PI3_Havana
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgrLobby)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.sessionBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.form1BindingSource)).EndInit();
-            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -393,6 +404,7 @@ namespace PI3_Havana
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnGetBoard;
+        private System.Windows.Forms.Label OS;
     }
 }
 
