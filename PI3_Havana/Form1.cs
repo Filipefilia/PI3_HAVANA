@@ -14,7 +14,8 @@ namespace PI3_Havana
     public partial class Form1 : Form
     {
         Session currentSession = new Session();
-        //para eventuais problemas de compatibilidades entre linux e windows.      
+        //para eventuais problemas de compatibilidades entre linux e windows.
+        //botar outros OS em case.
         public bool IsLinux()
         {
             OperatingSystem os = Environment.OSVersion;
@@ -28,9 +29,13 @@ namespace PI3_Havana
         public Form1()
         {
             InitializeComponent();
+            //tava crashando quando mudava pelas opcoes..
+            this.Icon = new Icon("../../Resources/pawn_pink.ico");
 
             //Label .dll version
             lblVersion.Text = "DLL V" + Jogo.Versao.ToString();
+            
+            
             if (IsLinux())
             {
                 OS.Text = "OS: GNU/Linux";
@@ -97,6 +102,8 @@ namespace PI3_Havana
             {
                 txtGameName.Clear();
                 txtInputPassword.Clear();
+                Session currentSession = new Session();
+                dgrLobby.DataSource = currentSession.currentList;
             }
         }
 
@@ -203,7 +210,7 @@ namespace PI3_Havana
 
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)//apagar?
         {
 
         }
@@ -380,7 +387,7 @@ namespace PI3_Havana
             txtGameId.Text = "";
             */
 
-            string[] currentPlayer = { txtPlayerId.Text, txtPlayerName.Text, txtPlayerPassword.Text, txtGameId.Text };
+            string[] currentPlayer = {txtPlayerId.Text, txtPlayerName.Text, txtPlayerPassword.Text, txtGameId.Text, txtPlayerCollor.Text};
 
             try
             {
@@ -399,6 +406,13 @@ namespace PI3_Havana
             //Form3 board = new Form3(currentPlayer, gameId);
             BoardInterface board = new BoardInterface(currentPlayer, gameId);
             board.ShowDialog();
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            //Refreshes datagrid Lobby
+            Session currentSession = new Session();
+            dgrLobby.DataSource = currentSession.currentList;
         }
     }
 }

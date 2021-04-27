@@ -52,11 +52,11 @@ namespace PI3_Havana
             this.txtGameId = new System.Windows.Forms.TextBox();
             this.lblCollor = new System.Windows.Forms.Label();
             this.lblGameId = new System.Windows.Forms.Label();
-            this.tmrLobby = new System.Windows.Forms.Timer(this.components);
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnGetBoard = new System.Windows.Forms.Button();
             this.OS = new System.Windows.Forms.Label();
+            this.btnRefresh = new System.Windows.Forms.Button();
             this.sessionBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.form1BindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgrLobby)).BeginInit();
@@ -68,7 +68,7 @@ namespace PI3_Havana
             // 
             // txtGameName
             // 
-            this.txtGameName.Location = new System.Drawing.Point(311, 285);
+            this.txtGameName.Location = new System.Drawing.Point(384, 285);
             this.txtGameName.Name = "txtGameName";
             this.txtGameName.Size = new System.Drawing.Size(100, 20);
             this.txtGameName.TabIndex = 4;
@@ -77,7 +77,7 @@ namespace PI3_Havana
             // lbGameName
             // 
             this.lbGameName.AutoSize = true;
-            this.lbGameName.Location = new System.Drawing.Point(417, 288);
+            this.lbGameName.Location = new System.Drawing.Point(490, 288);
             this.lbGameName.Name = "lbGameName";
             this.lbGameName.Size = new System.Drawing.Size(35, 13);
             this.lbGameName.TabIndex = 5;
@@ -86,7 +86,7 @@ namespace PI3_Havana
             // 
             // txtInputPassword
             // 
-            this.txtInputPassword.Location = new System.Drawing.Point(311, 308);
+            this.txtInputPassword.Location = new System.Drawing.Point(384, 308);
             this.txtInputPassword.Name = "txtInputPassword";
             this.txtInputPassword.PasswordChar = '*';
             this.txtInputPassword.Size = new System.Drawing.Size(100, 20);
@@ -96,7 +96,7 @@ namespace PI3_Havana
             // lbPassword
             // 
             this.lbPassword.AutoSize = true;
-            this.lbPassword.Location = new System.Drawing.Point(417, 311);
+            this.lbPassword.Location = new System.Drawing.Point(490, 311);
             this.lbPassword.Name = "lbPassword";
             this.lbPassword.Size = new System.Drawing.Size(53, 13);
             this.lbPassword.TabIndex = 7;
@@ -105,7 +105,7 @@ namespace PI3_Havana
             // 
             // btnCreateGame
             // 
-            this.btnCreateGame.Location = new System.Drawing.Point(311, 334);
+            this.btnCreateGame.Location = new System.Drawing.Point(384, 334);
             this.btnCreateGame.Name = "btnCreateGame";
             this.btnCreateGame.Size = new System.Drawing.Size(100, 49);
             this.btnCreateGame.TabIndex = 8;
@@ -115,7 +115,7 @@ namespace PI3_Havana
             // 
             // txtPlayerName
             // 
-            this.txtPlayerName.Location = new System.Drawing.Point(311, 412);
+            this.txtPlayerName.Location = new System.Drawing.Point(385, 412);
             this.txtPlayerName.Name = "txtPlayerName";
             this.txtPlayerName.Size = new System.Drawing.Size(100, 20);
             this.txtPlayerName.TabIndex = 9;
@@ -123,7 +123,7 @@ namespace PI3_Havana
             // 
             // txtPasswordGame
             // 
-            this.txtPasswordGame.Location = new System.Drawing.Point(311, 438);
+            this.txtPasswordGame.Location = new System.Drawing.Point(385, 438);
             this.txtPasswordGame.Name = "txtPasswordGame";
             this.txtPasswordGame.PasswordChar = '*';
             this.txtPasswordGame.Size = new System.Drawing.Size(100, 20);
@@ -133,7 +133,7 @@ namespace PI3_Havana
             // lblPlayerName
             // 
             this.lblPlayerName.AutoSize = true;
-            this.lblPlayerName.Location = new System.Drawing.Point(417, 419);
+            this.lblPlayerName.Location = new System.Drawing.Point(491, 419);
             this.lblPlayerName.Name = "lblPlayerName";
             this.lblPlayerName.Size = new System.Drawing.Size(36, 13);
             this.lblPlayerName.TabIndex = 11;
@@ -143,7 +143,7 @@ namespace PI3_Havana
             // lblPasswordEnter
             // 
             this.lblPasswordEnter.AutoSize = true;
-            this.lblPasswordEnter.Location = new System.Drawing.Point(417, 445);
+            this.lblPasswordEnter.Location = new System.Drawing.Point(491, 445);
             this.lblPasswordEnter.Name = "lblPasswordEnter";
             this.lblPasswordEnter.Size = new System.Drawing.Size(84, 13);
             this.lblPasswordEnter.TabIndex = 12;
@@ -152,7 +152,7 @@ namespace PI3_Havana
             // 
             // btnEnterGame
             // 
-            this.btnEnterGame.Location = new System.Drawing.Point(311, 464);
+            this.btnEnterGame.Location = new System.Drawing.Point(385, 464);
             this.btnEnterGame.Name = "btnEnterGame";
             this.btnEnterGame.Size = new System.Drawing.Size(100, 49);
             this.btnEnterGame.TabIndex = 13;
@@ -192,7 +192,7 @@ namespace PI3_Havana
             // 
             // btnStart
             // 
-            this.btnStart.Location = new System.Drawing.Point(175, 284);
+            this.btnStart.Location = new System.Drawing.Point(153, 284);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(100, 67);
             this.btnStart.TabIndex = 17;
@@ -276,12 +276,6 @@ namespace PI3_Havana
             this.lblGameId.Text = "Game ID";
             this.lblGameId.Click += new System.EventHandler(this.lblGameId_Click);
             // 
-            // tmrLobby
-            // 
-            this.tmrLobby.Enabled = true;
-            this.tmrLobby.Interval = 10000;
-            this.tmrLobby.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -322,6 +316,16 @@ namespace PI3_Havana
             this.OS.TabIndex = 29;
             this.OS.Text = "label1";
             // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Location = new System.Drawing.Point(267, 284);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(100, 67);
+            this.btnRefresh.TabIndex = 30;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
             // sessionBindingSource
             // 
             this.sessionBindingSource.DataSource = typeof(PI3_Havana.Session);
@@ -337,7 +341,9 @@ namespace PI3_Havana
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
             this.ClientSize = new System.Drawing.Size(871, 561);
+            this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.OS);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.lblGameId);
@@ -363,7 +369,7 @@ namespace PI3_Havana
             this.Controls.Add(this.lbGameName);
             this.Controls.Add(this.txtGameName);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Grupo Havana";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgrLobby)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -400,11 +406,11 @@ namespace PI3_Havana
         private System.Windows.Forms.TextBox txtGameId;
         private System.Windows.Forms.Label lblCollor;
         private System.Windows.Forms.Label lblGameId;
-        private System.Windows.Forms.Timer tmrLobby;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnGetBoard;
         private System.Windows.Forms.Label OS;
+        private System.Windows.Forms.Button btnRefresh;
     }
 }
 
