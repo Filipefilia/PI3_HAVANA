@@ -15,8 +15,8 @@ namespace PI3_Havana
     {
         Session currentSession = new Session();
         //para eventuais problemas de compatibilidades entre linux e windows.
-        //botar outros OS em case.
-        public bool IsLinux()
+        //botar outros OS em case, retornar um int;
+        public bool myOS()
         {
             OperatingSystem os = Environment.OSVersion;
             PlatformID pid = os.Platform;
@@ -34,9 +34,10 @@ namespace PI3_Havana
 
             //Label .dll version
             lblVersion.Text = "DLL V" + Jogo.Versao.ToString();
-            
-            
-            if (IsLinux())
+
+
+						/*
+            if (myOS())
             {
                 OS.Text = "OS: GNU/Linux";
             }
@@ -44,8 +45,9 @@ namespace PI3_Havana
             {
                 OS.Text = "OS: Windows";
             }
-            
-            
+						*/
+
+
             //Lobby DataGrid
             dgrLobby.DataSource = currentSession.currentList;
             dgrLobby.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -53,7 +55,7 @@ namespace PI3_Havana
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -114,11 +116,11 @@ namespace PI3_Havana
                 //Gets a datagrid row and save its id for enter in a new game
                 var selectedRow = dgrLobby.SelectedRows[0].DataBoundItem as Game;
                 int selectedGameId = selectedRow.id;
-                
+
                 //Gets player name and password for the chosen game
                 string playerName = txtPlayerName.Text;
                 string gamePassword = txtPasswordGame.Text;
-                
+
                 //Enters in a new game and receives user information
                 string response = Jogo.EntrarPartida(selectedGameId, playerName, gamePassword);
 
@@ -147,7 +149,7 @@ namespace PI3_Havana
             {
                 //Default message for unknown errors
                 MessageBox.Show("Couldn't perform this action, please try again.");
-            } 
+            }
             finally
             {
                 //Clear text boxes
@@ -169,7 +171,7 @@ namespace PI3_Havana
         {
 
         }
-        
+
         private void button1_Click_2(object sender, EventArgs e)
         {
 
@@ -182,12 +184,12 @@ namespace PI3_Havana
 
         private void listPlayers_MouseClick(object sender, MouseEventArgs e)
         {
-            
+
         }
 
         private void listBox1_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void btnStart_Click(object sender, EventArgs e)
@@ -210,7 +212,7 @@ namespace PI3_Havana
 
         }
 
-        private void Form1_Load(object sender, EventArgs e)//apagar?
+        private void Form1_Load(object sender, EventArgs e)
         {
 
         }
@@ -261,7 +263,7 @@ namespace PI3_Havana
 
                 //Send initiante game command
                 string response = Jogo.IniciarPartida(playerId, playerPassword);
-                
+
                 //Check if the message got a known error
                 if (response[0] == 'E')
                 {
@@ -378,23 +380,14 @@ namespace PI3_Havana
 
         private void btnGetBoard_Click(object sender, EventArgs e)
         {
-            this.Hide();
+
             int gameId;
-            /*
-            txtPlayerId.Text = "168";
-            txtPlayerPassword.Text = "6095CC";
-            txtPlayerName.Text = "";
-            txtGameId.Text = "";
-            */
 
-            string[] currentPlayer = {txtPlayerId.Text, txtPlayerName.Text, txtPlayerPassword.Text, txtGameId.Text, txtPlayerCollor.Text};
+            string[] currentPlayer = { txtPlayerId.Text, txtPlayerName.Text, txtPlayerPassword.Text, txtGameId.Text, txtPlayerCollor.Text };
 
+            
             try
             {
-                //currentPlayer.Append(txtPlayerId.Text);
-                //currentPlayer.Append(txtPlayerName.Text);
-                //currentPlayer.Append(txtPasswordGame.Text);
-                //currentPlayer.Append(txtGameId.Text);
                 gameId = Convert.ToInt32(currentPlayer[3]);
             }
             catch
@@ -402,10 +395,18 @@ namespace PI3_Havana
                 var selectedRow = dgrLobby.SelectedRows[0].DataBoundItem as Game;
                 gameId = selectedRow.id;
             }
-
-            //Form3 board = new Form3(currentPlayer, gameId);
-            BoardInterface board = new BoardInterface(currentPlayer, gameId);
-            board.ShowDialog();
+            string pTurn = Jogo.VerificarVez(gameId);
+            if (pTurn != "ERRO:Partida não está em jogo\r\n")
+            {
+                this.Hide();
+                //Form3 board = new Form3(currentPlayer, gameId);
+                BoardInterface board = new BoardInterface(currentPlayer, gameId, tb_botName.Text);
+                board.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("A partida não foi iniciada!");
+            }
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
@@ -413,6 +414,11 @@ namespace PI3_Havana
             //Refreshes datagrid Lobby
             Session currentSession = new Session();
             dgrLobby.DataSource = currentSession.currentList;
+        }
+
+        private void tb_botName_MouseClick(object sender, MouseEventArgs e)
+        {
+            tb_botName.Text = "";
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CantStopServer;
@@ -17,10 +18,18 @@ namespace PI3_Havana
         public string[] currentPlayer { get; private set; }
         public int gameId { get; private set; }
 
+        BotAI botAI = new BotAI();
+
         int climbers = 3;
         int playersInGame = 0;
+        bool playerTurn;
+
+        int[,,] playerBases = new int[11,13,1];
+        public int[,,] enemyBases = new int[11, 13, 1];
 
         bool[] climbersInUse = new bool[] { false, false, false };
+        int[,] climbersPos = new int[3, 2];
+        string[] permutations = new string[6];
 
         //poderia colocar um dicionario com o valor sendo uma array? (fazer teste)
         //[player][id, name, color]
@@ -31,7 +40,10 @@ namespace PI3_Havana
 
         public Dictionary<string, int> ColorRank = new Dictionary<string, int>();
 
+        string bot;
         string res_path = "../../Resources/";
+        string old_log = "";
+        string new_log = "";
         string old_brd = "";
         string new_brd = "";
         string old_pt = "";
@@ -205,19 +217,32 @@ namespace PI3_Havana
                     bus_climber2.Show();
                     bus_climber3.Show();
                     break;
+                default:
+                    break;
             }
+           
             string DriverColor;
             string[] pTurn = new string[2];
-            pTurn = Jogo.VerificarVez(gameId).Split(',');
-            //para evitar crash caso a string venha vazia (fazer mais testes/mudar esquema)
-            if (pTurn[1] != null)
+            string verificaVez;
+            verificaVez = Jogo.VerificarVez(gameId);
+            //evitar crash quando o jogo termina.
+            if (verificaVez != "" && verificaVez != null && verificaVez != "ERRO:Partida não está em jogo\r\n")
             {
-                DriverColor = GetPlayerColor(pTurn[1]);
-                driver.Image = Image.FromFile(res_path + "driver_" + DriverColor + ".png");
-            }
-            else
-            {
-                MessageBox.Show("ERROR DISPLAYING BUS DRIVERS!");
+
+                if (verificaVez[0] != 'E' && verificaVez != "")
+                {
+                    pTurn = verificaVez.Split(',');
+                    //para evitar crash caso a string venha vazia (fazer mais testes/mudar esquema)
+                    if (pTurn[1] != null && pTurn[1] != "")
+                    {
+                        DriverColor = GetPlayerColor(pTurn[1]);
+                        driver.Image = Image.FromFile(res_path + "driver_" + DriverColor + ".png");
+                    }
+                    else
+                    {
+                        MessageBox.Show("ERROR DISPLAYING BUS DRIVERS!");
+                    }
+                }
             }
         }
 
@@ -257,7 +282,6 @@ namespace PI3_Havana
             int[] pixelPos = new int[2];
             pixelPos = GetPixelPos(baseInfo);
             //DEBUGAR MELHOR
-
             if (climbersInUse[0] == true && climbersInUse[1] == true && climbersInUse[2] == true)
             {
                 for (int i = 0; i < 3; i++)
@@ -271,6 +295,8 @@ namespace PI3_Havana
                 mtn_climber1.Location = new Point(pixelPos[0], pixelPos[1]);
                 mtn_climber1.Show();
                 climbersInUse[0] = true;
+                climbersPos[0, 0] = Int32.Parse(baseInfo[0]);
+                climbersPos[0, 1] = Int32.Parse(baseInfo[1]);
             }
             else
             {
@@ -279,12 +305,16 @@ namespace PI3_Havana
                     mtn_climber2.Location = new Point(pixelPos[0], pixelPos[1]);
                     mtn_climber2.Show();
                     climbersInUse[1] = true;
+                    climbersPos[1, 0] = Int32.Parse(baseInfo[0]);
+                    climbersPos[1, 1] = Int32.Parse(baseInfo[1]);
                 }
                 else
                 {
                     mtn_climber3.Location = new Point(pixelPos[0], pixelPos[1]);
                     mtn_climber3.Show();
                     climbersInUse[2] = true;
+                    climbersPos[1, 0] = Int32.Parse(baseInfo[0]);
+                    climbersPos[1, 1] = Int32.Parse(baseInfo[1]);
                 }
             }
             climbers--;
@@ -300,6 +330,25 @@ namespace PI3_Havana
                 // 11*4 + 3 = 47 bases possiveis.
                 string[] data = new string[50];
                 data = boardData.Replace("\r", "").Split('\n');
+                //reseta para nao perder a contagem correta!
+                climbers = 3;
+                //reseta variaveis do jogador.
+                for (int i = 0; i < 11; i++)
+                {
+                    for (int j = 0; j < 13; j++)
+                    {
+                        playerBases[i, j, 0] = 0;
+                    }
+                }
+                //reseta variaveis dos inimigos.
+                for (int i = 0; i < 11; i++)
+                {
+                    for (int j = 0; j < 13; j++)
+                    {
+                        enemyBases[i, j, 0] = 0;
+                    }
+                }
+
                 foreach (string LineData in data)
                 {
                     if (LineData != null && LineData != "")
@@ -316,6 +365,17 @@ namespace PI3_Havana
                        
                             int col = (Int32.Parse(bInfo[0]) - 2); //a primeira coluna eh o 2.
                             int row = (Int32.Parse(bInfo[1]) - 1); //a primeira linha eh o 1.
+                            //atualiza a matriz de bases do jogador (usada pelo bot)
+                            if (currentPlayer[0] == bInfo[2])
+                            {
+                                playerBases[col, row, 0] = 1; 
+                            }
+                            else
+                            {
+                                enemyBases[col, row, 0] = 1;
+                            }
+                           
+
                             //se ja tiver jogadores naquela base
                             if (c_bases[col, row, 4] != "" && c_bases[col, row, 4] != null)
                             {
@@ -421,6 +481,13 @@ namespace PI3_Havana
                         break;
                     }
                 }
+                //atualiza as bases para o botAI
+                if (bot == "pc")
+                {
+                    botAI.EnemyBases = enemyBases;
+                    botAI.PlayerBases = playerBases;
+                }
+                
             }
         }
 
@@ -435,20 +502,45 @@ namespace PI3_Havana
         public void UpdateBoard()
         {
             //se a vez do jogador mudar, resetar os alpinistas.
+            //Thread.Sleep(300);
             new_pt = Jogo.VerificarVez(gameId);
             if (new_pt != old_pt)
             {
                 //reseta variaveis dos alpinistas.
-                climbers = 3;
+                climbers = 3;//apagar? ja ocorre em SpawnClimbers.
                 for (int i = 0; i < 3; i++)
                 {
                     climbersInUse[i] = false;
                 }
                 old_pt = new_pt;
-                UpdateBus();
-            }
+                if (new_pt != "ERRO:Partida não está em jogo\r\n")
+                {
 
-            //so mexe nas bases caso haja necessidade.
+
+                    string[] pt = new string[2];
+                    pt = new_pt.Split(',');
+                    if (pt[0] != "E" &&  bot != "player" && bot != "spec")
+                    {
+                        if (Convert.ToInt32(pt[1]) == Convert.ToInt32(currentPlayer[0]))
+                        {
+                            //vez da ai jogar
+                            playerTurn = true;
+                        }
+                    }
+                }
+                else
+                {
+                    refreshBoard.Stop();
+                    playerTurn = false;
+                    Application.Exit();
+                }
+            }
+            HideClimbers();
+            UpdateBus();
+            //evitar ter que aguardar + 2500 milisegundos para atualizar.
+            //precisa mesmo? (testar)
+            //Thread.Sleep(300);
+            //mexe nas bases caso haja necessidade.
             new_brd = Jogo.ExibirTabuleiro(gameId);
             if (new_brd != old_brd)
             {
@@ -458,8 +550,48 @@ namespace PI3_Havana
                 UpdateBus();
                 old_brd = new_brd;
             }
+            //Thread.Sleep(300);
+            //mexe no log caso haja necessidade.
+            new_log = Jogo.ExibirHistorico(gameId);
+            if (old_log != new_log)
+            {
+                UpdateLog(new_log);
+                old_log = new_log;
+            }
+
         }
 
+        public int GetClimberCount()
+        {
+            int clb = 0;
+            for (int i = 0; i < 3; i++)
+            {
+                if (climbersInUse[i])
+                {
+                    clb++;
+                }
+            }
+            return clb;
+        }
+
+        public void BotTurn()
+        {
+            if (botAI.close)
+            {
+                Application.Exit();
+            }
+            while (playerTurn)
+            {
+                UpdateBoard();
+                botAI.Play();
+                
+                if (!botAI.IsPlayerTurn())
+                {
+                    playerTurn = false;
+                }
+            }
+            UpdateBoard();
+        }
         public void ChangeIcon(string id)
         {
             //evitar crash para jogos em andamento.
@@ -468,13 +600,78 @@ namespace PI3_Havana
                 string color = PlayersColor[Int32.Parse(id)];
                 this.Icon = new Icon(res_path + "pawn_" + color + ".ico");
             }
-            
         }
 
-        public BoardInterface(string[] inputCurrentPlayer, int inputGameId)
+        public void MakeGUI(string user)
+        {
+            if (user != "player")
+            {
+                foreach (Button btn in this.Controls.OfType<Button>())
+                {
+                    btn.Hide();
+                }
+                foreach (TextBox tb in this.Controls.OfType<TextBox>())
+                {
+                    tb.Hide();
+                }
+                dice1.Hide();
+                dice2.Hide();
+                dice3.Hide();
+                dice4.Hide();
+            }
+            else
+            {
+                lb_log.Hide();
+            }
+            lb_user.Text = "User: " + user;
+        }
+
+        public void ChoosePlayer()
+        {
+            switch (bot)
+            {
+                case "player":
+                    break;
+                case "random":
+                    break;
+                case "spec":
+                    bot = "spec";
+                    break;
+                default:
+                    bot = "pc";
+                    break;
+            }
+        }
+
+        public void UpdateLog(string c_log)
+        {
+            if (c_log != "" && c_log != null)
+            {
+                string[] log = c_log.Replace("\r", "").Split('\n');
+                int max_size;
+                if (log.Length > 6)
+                {
+                    max_size = 6;
+                }
+                else
+                {
+                    max_size = log.Length;
+                }
+                //nao muito eficiente, mas pouca dor de cabeca
+                lb_log.Items.Clear();
+
+                for (int i = 0; i < max_size; i++)
+                {
+                    lb_log.Items.Add(log[i]);
+                }
+            }
+        }
+
+        public BoardInterface(string[] inputCurrentPlayer, int inputGameId, string botName)
         {
             gameId = inputGameId;
             currentPlayer = inputCurrentPlayer;
+            bot = botName;
             //nao mudar a ordem!
             InitializeComponent();
             GetPlayersData();
@@ -482,8 +679,12 @@ namespace PI3_Havana
             CreateMatrix();
             ChangeIcon(currentPlayer[0]);
             //alguns repetidos em UpdateBoard, mas para aparecer correto em jogos em andamento.
+            //talvez possa retirar alguns com a logica nova, testar..
             HideBases();
             HideClimbers();
+            ChoosePlayer();
+            MakeGUI(bot);
+            botAI.Init(currentPlayer, gameId);
             UpdateBus();
             UpdateBoard();
             refreshBoard.Start();
@@ -501,16 +702,21 @@ namespace PI3_Havana
                 int playerId = Convert.ToInt32(currentPlayer[0]);
                 string playerPassword = currentPlayer[2];
                 string rollDice = Jogo.RolarDados(playerId, playerPassword);
+                MessageBox.Show($"{rollDice}");
 
                 if (rollDice[0] != 'E')
                 {
                     string[] diceResult = rollDice.Replace("\r", "").Split('\n');
 
-                    // .ToString() necessario?
                     dice1.Image = Image.FromFile(res_path + "dice" + diceResult[0][1].ToString() + ".png");
                     dice2.Image = Image.FromFile(res_path + "dice" + diceResult[1][1].ToString() + ".png");
                     dice3.Image = Image.FromFile(res_path + "dice" + diceResult[2][1].ToString() + ".png");
                     dice4.Image = Image.FromFile(res_path + "dice" + diceResult[3][1].ToString() + ".png");
+
+                    permutations[0] = diceResult[0][1].ToString() + " e " + diceResult[1][1].ToString() + " // " + diceResult[2][1].ToString() + " e " + diceResult[3][1].ToString();
+                    permutations[1] = diceResult[0][1].ToString() + " e " + diceResult[2][1].ToString() + " // " + diceResult[1][1].ToString() + " e " + diceResult[3][1].ToString();
+                    permutations[2] = diceResult[1][1].ToString() + " e " + diceResult[2][1].ToString() + " // " + diceResult[0][1].ToString() + " e " + diceResult[3][1].ToString();
+
                 }
                 else
                 {
@@ -579,8 +785,41 @@ namespace PI3_Havana
 
         private void refreshBoard_Tick(object sender, EventArgs e)
         {
-            //atualiza o tabuleiro a cada 1500 milisegundos.
-            UpdateBoard();
+            //atualiza o tabuleiro a cada 2500 milisegundos.
+       
+            if (bot == "player" || bot == "spec")
+            {
+                UpdateBoard();
+            }
+            else
+            {
+                if (botAI.IsPlayerTurn() && !botAI.playing)
+                {
+                    playerTurn = true;
+                }
+
+                if (!botAI.playing)
+                {
+                    BotTurn();
+                }
+                else
+                {
+                    UpdateBoard();
+                }
+            } 
+        }
+
+        private void btn_show_hist_Click(object sender, EventArgs e)
+        {
+            string hist = Jogo.ExibirHistorico(gameId);
+            MessageBox.Show($"{hist}");
+        }
+
+        private void btn_perm_Click(object sender, EventArgs e)
+        {
+            string perm = permutations[0] + "\n" + permutations[1] + "\n" + permutations[2];
+            MessageBox.Show($"{perm}");
+
         }
     }
 }

@@ -382,6 +382,10 @@ namespace PI3_Havana
             this.btn_stop = new System.Windows.Forms.Button();
             this.btn_move = new System.Windows.Forms.Button();
             this.refreshBoard = new System.Windows.Forms.Timer(this.components);
+            this.btn_show_hist = new System.Windows.Forms.Button();
+            this.btn_perm = new System.Windows.Forms.Button();
+            this.lb_log = new System.Windows.Forms.ListBox();
+            this.lb_user = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dice1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dice2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dice3)).BeginInit();
@@ -732,7 +736,7 @@ namespace PI3_Havana
             this.dice1.BackColor = System.Drawing.Color.Transparent;
             this.dice1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("dice1.BackgroundImage")));
             this.dice1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.dice1.Location = new System.Drawing.Point(457, 499);
+            this.dice1.Location = new System.Drawing.Point(457, 495);
             this.dice1.Name = "dice1";
             this.dice1.Size = new System.Drawing.Size(54, 50);
             this.dice1.TabIndex = 0;
@@ -743,7 +747,7 @@ namespace PI3_Havana
             this.dice2.BackColor = System.Drawing.Color.Transparent;
             this.dice2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("dice2.BackgroundImage")));
             this.dice2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.dice2.Location = new System.Drawing.Point(517, 499);
+            this.dice2.Location = new System.Drawing.Point(517, 495);
             this.dice2.Name = "dice2";
             this.dice2.Size = new System.Drawing.Size(54, 50);
             this.dice2.TabIndex = 1;
@@ -754,7 +758,7 @@ namespace PI3_Havana
             this.dice3.BackColor = System.Drawing.Color.Transparent;
             this.dice3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("dice3.BackgroundImage")));
             this.dice3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.dice3.Location = new System.Drawing.Point(577, 499);
+            this.dice3.Location = new System.Drawing.Point(577, 495);
             this.dice3.Name = "dice3";
             this.dice3.Size = new System.Drawing.Size(54, 50);
             this.dice3.TabIndex = 2;
@@ -765,7 +769,7 @@ namespace PI3_Havana
             this.dice4.BackColor = System.Drawing.Color.Transparent;
             this.dice4.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("dice4.BackgroundImage")));
             this.dice4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.dice4.Location = new System.Drawing.Point(637, 499);
+            this.dice4.Location = new System.Drawing.Point(637, 495);
             this.dice4.Name = "dice4";
             this.dice4.Size = new System.Drawing.Size(54, 50);
             this.dice4.TabIndex = 3;
@@ -943,9 +947,9 @@ namespace PI3_Havana
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(521, 555);
+            this.button2.Location = new System.Drawing.Point(425, 575);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.Size = new System.Drawing.Size(86, 23);
             this.button2.TabIndex = 21;
             this.button2.Text = "ShowBoard";
             this.button2.UseVisualStyleBackColor = true;
@@ -4193,7 +4197,7 @@ namespace PI3_Havana
             // 
             // tb_dices
             // 
-            this.tb_dices.Location = new System.Drawing.Point(697, 530);
+            this.tb_dices.Location = new System.Drawing.Point(697, 525);
             this.tb_dices.Name = "tb_dices";
             this.tb_dices.Size = new System.Drawing.Size(75, 20);
             this.tb_dices.TabIndex = 355;
@@ -4203,7 +4207,7 @@ namespace PI3_Havana
             // 
             // tb_trails
             // 
-            this.tb_trails.Location = new System.Drawing.Point(697, 549);
+            this.tb_trails.Location = new System.Drawing.Point(697, 546);
             this.tb_trails.Name = "tb_trails";
             this.tb_trails.Size = new System.Drawing.Size(75, 20);
             this.tb_trails.TabIndex = 357;
@@ -4223,7 +4227,7 @@ namespace PI3_Havana
             // 
             // btn_move
             // 
-            this.btn_move.Location = new System.Drawing.Point(697, 575);
+            this.btn_move.Location = new System.Drawing.Point(616, 555);
             this.btn_move.Name = "btn_move";
             this.btn_move.Size = new System.Drawing.Size(75, 23);
             this.btn_move.TabIndex = 359;
@@ -4233,8 +4237,46 @@ namespace PI3_Havana
             // 
             // refreshBoard
             // 
-            this.refreshBoard.Interval = 1500;
+            this.refreshBoard.Interval = 2500;
             this.refreshBoard.Tick += new System.EventHandler(this.refreshBoard_Tick);
+            // 
+            // btn_show_hist
+            // 
+            this.btn_show_hist.Location = new System.Drawing.Point(517, 555);
+            this.btn_show_hist.Name = "btn_show_hist";
+            this.btn_show_hist.Size = new System.Drawing.Size(77, 23);
+            this.btn_show_hist.TabIndex = 360;
+            this.btn_show_hist.Text = "Show Hist";
+            this.btn_show_hist.UseVisualStyleBackColor = true;
+            this.btn_show_hist.Click += new System.EventHandler(this.btn_show_hist_Click);
+            // 
+            // btn_perm
+            // 
+            this.btn_perm.Location = new System.Drawing.Point(518, 575);
+            this.btn_perm.Name = "btn_perm";
+            this.btn_perm.Size = new System.Drawing.Size(75, 23);
+            this.btn_perm.TabIndex = 361;
+            this.btn_perm.Text = "Permutation";
+            this.btn_perm.UseVisualStyleBackColor = true;
+            this.btn_perm.Click += new System.EventHandler(this.btn_perm_Click);
+            // 
+            // lb_log
+            // 
+            this.lb_log.FormattingEnabled = true;
+            this.lb_log.Location = new System.Drawing.Point(425, 485);
+            this.lb_log.Name = "lb_log";
+            this.lb_log.Size = new System.Drawing.Size(347, 95);
+            this.lb_log.TabIndex = 363;
+            // 
+            // lb_user
+            // 
+            this.lb_user.AutoSize = true;
+            this.lb_user.BackColor = System.Drawing.Color.Transparent;
+            this.lb_user.Location = new System.Drawing.Point(698, 583);
+            this.lb_user.Name = "lb_user";
+            this.lb_user.Size = new System.Drawing.Size(29, 13);
+            this.lb_user.TabIndex = 364;
+            this.lb_user.Text = "User";
             // 
             // BoardInterface
             // 
@@ -4243,6 +4285,10 @@ namespace PI3_Havana
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(784, 601);
+            this.Controls.Add(this.lb_user);
+            this.Controls.Add(this.lb_log);
+            this.Controls.Add(this.btn_perm);
+            this.Controls.Add(this.btn_show_hist);
             this.Controls.Add(this.btn_move);
             this.Controls.Add(this.btn_stop);
             this.Controls.Add(this.tb_trails);
@@ -5303,5 +5349,9 @@ namespace PI3_Havana
         private System.Windows.Forms.Button btn_stop;
         private System.Windows.Forms.Button btn_move;
         private System.Windows.Forms.Timer refreshBoard;
+        private System.Windows.Forms.Button btn_show_hist;
+        private System.Windows.Forms.Button btn_perm;
+        private System.Windows.Forms.ListBox lb_log;
+        private System.Windows.Forms.Label lb_user;
     }
 }

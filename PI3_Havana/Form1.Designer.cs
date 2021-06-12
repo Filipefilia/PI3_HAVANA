@@ -57,6 +57,8 @@ namespace PI3_Havana
             this.btnGetBoard = new System.Windows.Forms.Button();
             this.OS = new System.Windows.Forms.Label();
             this.btnRefresh = new System.Windows.Forms.Button();
+            this.tb_botName = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.sessionBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.form1BindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgrLobby)).BeginInit();
@@ -165,9 +167,9 @@ namespace PI3_Havana
             this.lblVersion.AutoSize = true;
             this.lblVersion.Location = new System.Drawing.Point(783, 539);
             this.lblVersion.Name = "lblVersion";
-            this.lblVersion.Size = new System.Drawing.Size(35, 13);
+            this.lblVersion.Size = new System.Drawing.Size(27, 13);
             this.lblVersion.TabIndex = 14;
-            this.lblVersion.Text = "label1";
+            this.lblVersion.Text = "DLL";
             this.lblVersion.Click += new System.EventHandler(this.lvlVersion_Click);
             // 
             // dgrLobby
@@ -261,9 +263,9 @@ namespace PI3_Havana
             this.lblCollor.AutoSize = true;
             this.lblCollor.Location = new System.Drawing.Point(33, 477);
             this.lblCollor.Name = "lblCollor";
-            this.lblCollor.Size = new System.Drawing.Size(33, 13);
+            this.lblCollor.Size = new System.Drawing.Size(31, 13);
             this.lblCollor.TabIndex = 25;
-            this.lblCollor.Text = "Collor";
+            this.lblCollor.Text = "Color";
             this.lblCollor.Click += new System.EventHandler(this.lblCollor_Click);
             // 
             // lblGameId
@@ -311,10 +313,10 @@ namespace PI3_Havana
             // 
             this.OS.AutoSize = true;
             this.OS.Location = new System.Drawing.Point(783, 514);
-            this.OS.Name = "OS";
-            this.OS.Size = new System.Drawing.Size(35, 13);
+            this.OS.Name = "";
+            this.OS.Size = new System.Drawing.Size(22, 13);
             this.OS.TabIndex = 29;
-            this.OS.Text = "label1";
+            this.OS.Text = "OS";
             // 
             // btnRefresh
             // 
@@ -325,6 +327,25 @@ namespace PI3_Havana
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.UseVisualStyleBackColor = true;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
+            // tb_botName
+            // 
+            this.tb_botName.Location = new System.Drawing.Point(750, 363);
+            this.tb_botName.Name = "tb_botName";
+            this.tb_botName.Size = new System.Drawing.Size(87, 20);
+            this.tb_botName.TabIndex = 33;
+            this.tb_botName.Text = "pc";
+            this.tb_botName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tb_botName.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tb_botName_MouseClick);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(747, 347);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(29, 13);
+            this.label1.TabIndex = 34;
+            this.label1.Text = "User";
             // 
             // sessionBindingSource
             // 
@@ -343,6 +364,8 @@ namespace PI3_Havana
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
             this.ClientSize = new System.Drawing.Size(871, 561);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.tb_botName);
             this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.OS);
             this.Controls.Add(this.groupBox1);
@@ -411,6 +434,8 @@ namespace PI3_Havana
         private System.Windows.Forms.Button btnGetBoard;
         private System.Windows.Forms.Label OS;
         private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.TextBox tb_botName;
+        private System.Windows.Forms.Label label1;
     }
 }
 
